@@ -1,4 +1,4 @@
-package simpleTest;
+package springTest;
 
 public class RegisterRequest {
 	private String email;

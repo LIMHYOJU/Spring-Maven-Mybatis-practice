@@ -1,4 +1,4 @@
-package simpleTest;
+package springTest;
 
 public class WrongIdPasswordException extends RuntimeException {
 	

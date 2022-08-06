@@ -1,4 +1,4 @@
-package simpleTest;
+package springTest;
 
 import dao.MemberDao;
 

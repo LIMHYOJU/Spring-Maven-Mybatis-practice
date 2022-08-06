@@ -1,8 +1,10 @@
-package simpleTest;
+package config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+
+import simpleTest.Greeter;
 
 @Configuration//설정 클래스
 public class AppContext {

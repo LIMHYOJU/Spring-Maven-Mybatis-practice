@@ -1,8 +1,8 @@
 package assembler;
 
 import dao.MemberDao;
-import simpleTest.ChangePasswordSerive;
-import simpleTest.MemberRegisterService;
+import springTest.ChangePasswordSerive;
+import springTest.MemberRegisterService;
 
 public class Assembler {
 

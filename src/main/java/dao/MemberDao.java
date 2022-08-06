@@ -1,9 +1,10 @@
 package dao;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import simpleTest.Member;
+import springTest.Member;
 
 public class MemberDao {
 	private static long nextId=0;
@@ -21,5 +22,8 @@ public class MemberDao {
 	public void update(Member member) {
 		map.put(member.getEmail(), member);
 	}
-
+	
+	public Collection<Member> selectAll(){
+		return map.values();
+	}
 }

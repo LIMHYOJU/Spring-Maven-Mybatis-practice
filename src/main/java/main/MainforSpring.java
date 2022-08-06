@@ -4,17 +4,25 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import assembler.Assembler;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import config.AppCtx;
 import springTest.ChangePasswordSerive;
+import springTest.MemberInfoPrinter;
+import springTest.MemberListPrinter;
 import springTest.MemberNotFoundException;
 import springTest.MemberRegisterService;
 import springTest.RegisterRequest;
 import springTest.WrongIdPasswordException;
 
-public class MainForAssembler {
+public class MainforSpring {
+	
+	private static AnnotationConfigApplicationContext ctx= null;
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
+		ctx = new AnnotationConfigApplicationContext(AppCtx.class);
+		
 		BufferedReader reader= new BufferedReader(new InputStreamReader(System.in));
 		while (true) {
 			System.out.println("명령어를 입력 해주세요");
@@ -28,12 +36,16 @@ public class MainForAssembler {
 			}else if (command.startsWith("change ")) {
 				processChangeCommand(command.split(" "));
 				continue;
+			}else if (command.startsWith("list")) {
+				processListCommand();
+				continue;
+			}else if (command.startsWith("info ")) {
+				processInfoCommand(command.split(" "));
+				continue;
 			}
 			printHelp();
 		}
 	}
-
-	private static Assembler assembler = new Assembler();
 	
 	private static void processNewCommand(String[] split) {
 		// TODO Auto-generated method stub
@@ -41,7 +53,7 @@ public class MainForAssembler {
 			printHelp();
 			return;
 		}
-		MemberRegisterService regSvc = assembler.getRegSvc();
+		MemberRegisterService regSvc = ctx.getBean("memberRegSvc",MemberRegisterService.class);
 		RegisterRequest req = new RegisterRequest();
 		req.setEmail(split[1]);
 		req.setName(split[2]);
@@ -66,7 +78,7 @@ public class MainForAssembler {
 			printHelp();
 			return;
 		}
-		ChangePasswordSerive changepwdSvc = assembler.getPwdSvc();
+		ChangePasswordSerive changepwdSvc = ctx.getBean("changePwdSvc",ChangePasswordSerive.class);
 
 		try {
 			changepwdSvc.changePassword(split[1], split[2], split[3]);
@@ -88,6 +100,22 @@ public class MainForAssembler {
 		System.out.println("new 이메일 이름 암호 암호확인");
 		System.out.println("change 이메일 이름 현비번 구비번");
 		System.out.println();
+	}
+	
+	private static void processListCommand() {
+		// TODO Auto-generated method stub
+		MemberListPrinter listPrinter= ctx.getBean("listPrinter",MemberListPrinter.class);
+		listPrinter.printAll();
+	}
+
+	private static void processInfoCommand(String[] split) {
+		// TODO Auto-generated method stub
+		if (split.length != 2) {
+			printHelp();
+			return;
+		}
+		MemberInfoPrinter infoPrinter = ctx.getBean("infoPrinter",MemberInfoPrinter.class);
+		infoPrinter.printMemberinfo(split[1]);
 	}
 
 }
