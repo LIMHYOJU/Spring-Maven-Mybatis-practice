@@ -1,13 +1,14 @@
 package simpleTest;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
+
 
 public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stb
 
+		//simpleTest AppContext,greeter
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppContext.class);
 
 		Greeter g = ctx.getBean("greeter",Greeter.class);
