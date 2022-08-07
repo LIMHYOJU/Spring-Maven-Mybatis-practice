@@ -4,3 +4,5 @@
 Main -스프링 작동 확인(싱글톤,프로토타입)
 MainForAssembler - 스프링 안쓸경우의 비교대상
 MainforSpring - 스프링의 의존 주입을 사용할경우
+
+https://blog.naver.com/heluo1994/222841204237 에 설명/제작과정 기재되어있습니다.
